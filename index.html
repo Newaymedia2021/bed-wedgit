@@ -43,6 +43,19 @@
       {
         opacity: 1;
       }
+      .table-responsive
+      {
+        position: relative;
+      }
+      .table-responsive > p
+      {
+        position: sticky;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+      }
+
     </style>
   </head>
   <body> 
@@ -96,11 +109,11 @@
         <button type="button" id="copy" class="btn btn-sm btn-success">複製</button>
         <button type="button" id="clear" class="btn btn-sm btn-danger">清空</button>
       </div>
-      <div class="table-responsive py-3 pb-5">
+      <div class="table-responsive pt-3">
         <table>
           <tr id="items"><!-- 丟入 --></tr>
         </table>
-        <p>底部滑動可以看到更多</p>
+        <p class="my-4 text-danger">使用手機時，底部滑動可以看到更多</p>
       </div>
     </div>
     <script>
