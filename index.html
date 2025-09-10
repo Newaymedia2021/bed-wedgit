@@ -120,11 +120,12 @@
       </div>
     </div>
     <script>
-      function toolShow()
+      function action()
       {
         let len = $('#items td').length
         if (len > 0) {
           $('.tools').removeClass('d-none')
+          $('.table-responsive').stop().animate({scrollLeft:$('#items').innerWidth()},800)
         } else {
           $('.tools').addClass('d-none')
         }
@@ -134,7 +135,7 @@
         let text = $(this).text().trim()
         let html = `<td><span>${text}<i class="bi bi-x"></i></span></td>`
         $('#items').append(html)
-        toolShow()
+        action()
       })
       
       const sortable1El = document.getElementById('items')
@@ -147,12 +148,12 @@
       $(document).on("click",'table td span i',function(e){
         e.preventDefault
         $(this).closest('td').remove()
-        toolShow()
+        action()
       })
 
       $('#clear').on("click",function(e){
         $('#items td').remove()
-        toolShow()
+        action()
       })
 
       $('#copy').on("click",function(e){
