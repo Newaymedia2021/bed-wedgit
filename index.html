@@ -61,51 +61,49 @@
   <body> 
     <div class="container py-4">
       <h1 class="mb-4">工單產生器</h1>
-      <div class="row g-3 mb-4" id="buttons">
-        <div class="col-12 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title">標題</div>
-              <div class="row g-3">
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test1</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test2</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test3</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test4</button>
-                </div>
-              </div>
+      <ul class="nav nav-tabs" id="" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="tab-pane-1" aria-selected="true">標題一</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="tab-pane-2" aria-selected="false">標題二</button>
+        </li>
+      </ul>
+      <div class="tab-content p-3 border border-top-0" id="buttons">
+        <div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+          <div class="row g-3">
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test1</button>
+            </div>
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test2</button>
+            </div>
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test3</button>
+            </div>
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test4</button>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title">標題</div>
-              <div class="row g-3">
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test5</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test6</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test7</button>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button">test8</button>
-                </div>
-              </div>
+        <div class="tab-pane fade" id="tab-pane-2" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="row g-3">
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test5</button>
+            </div>
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test6</button>
+            </div>
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test7</button>
+            </div>
+            <div class="col-auto">
+              <button class="material btn btn-primary" type="button">test8</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="tools d-none">
+      <div class="tools pt-3 d-none">
         <button type="button" id="copy" class="btn btn-sm btn-success">複製</button>
         <button type="button" id="clear" class="btn btn-sm btn-danger">清空</button>
       </div>
@@ -127,7 +125,7 @@
         }
       }
 
-      $("#buttons button").on('click',function(){
+      $(document).on('click','#buttons .material',function(){
         let text = $(this).text().trim()
         let html = `<td><span>${text}<i class="bi bi-x-circle-fill"></i></span></td>`
         $('#items').append(html)
