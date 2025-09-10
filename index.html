@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工單</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js" integrity="sha512-csIng5zcB+XpulRUa+ev1zKo7zRNGpEaVfNB9On1no9KYTEY/rLGAEEpvgdw6nim1WdTuihZY1eqZ31K7/fZjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+      table
+      {
+        width: 100%;
+      }
+      td span
+      {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        background-color: white;
+        border: solid 1px black;
+        position: relative;
+      }
+      td span i
+      {
+        position: absolute;
+        left: 100%;
+        bottom: 100%;
+        transform: translate(-50%, 50%);
+        z-index: 2;
+        color: red;
+        background-color: #fff;
+        border-radius: 50%;
+        opacity: 0;
+        width: 16px;
+        height: 16px;
+        line-height: 1;
+      }
+      td span:hover > i
+      {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body> 
+    <div class="container py-4">
+      <h1 class="mb-4">工單產生器</h1>
+      <div class="row g-3 mb-4" id="buttons">
+        <div class="col-12 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">標題</div>
+              <div class="row g-3">
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test1</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test2</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test3</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test4</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">標題</div>
+              <div class="row g-3">
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test5</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test6</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test7</button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" type="button">test8</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tools d-none">
+        <button type="button" id="copy" class="btn btn-sm btn-success">複製</button>
+        <button type="button" id="clear" class="btn btn-sm btn-danger">清空</button>
+      </div>
+      <div class="table-responsive pt-3">
+        <table>
+          <tr id="items"><!-- 丟入 --></tr>
+        </table>
+      </div>
+    </div>
+    <script>
+      function toolShow()
+      {
+        let len = $('#items td').length
+        if (len > 0) {
+          $('.tools').removeClass('d-none')
+        } else {
+          $('.tools').addClass('d-none')
+        }
+      }
+
+      $("#buttons button").on('click',function(){
+        let text = $(this).text().trim()
+        let html = `<td><span>${text}<i class="bi bi-x-circle-fill"></i></span></td>`
+        $('#items').append(html)
+        toolShow()
+      })
+      
+      const sortable1El = document.getElementById('items')
+      const sortable1 = Sortable.create(sortable1El, {
+        swapThreshold: 1,
+        animation: 150
+      })
+
+      $(document).on("click",'table td span i',function(e){
+        e.preventDefault
+        $(this).closest('td').remove()
+        toolShow()
+      })
+
+      $('#clear').on("click",function(e){
+        $('#items td').remove()
+        toolShow()
+      })
+
+      $('#copy').on("click",function(e){
+        var $temp = $("<textarea>");
+        $("body").append($temp);
+
+        const cells = [];
+        $('#items td').each(function(){
+          let text = $(this).text().trim();
+          cells.push(text);
+        });
+        let output = cells.join('\t');
+        $temp.val(output).select();
+        document.execCommand("copy");
+        $temp.remove();
+        alert('已複製')
+      })
+
+    </script>
+  </body>
+</html>
