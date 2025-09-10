@@ -52,6 +52,20 @@
       {
         position: relative;
       }
+      /* 水平捲軸 */
+      .table-responsive::-webkit-scrollbar {
+        height: 8px; /* 捲軸高度 */
+      }
+      .table-responsive::-webkit-scrollbar-track {
+        background: #f1f1f1; /* 底色 */
+      }
+      .table-responsive::-webkit-scrollbar-thumb {
+        background: #888;    /* 滑塊顏色 */
+        border-radius: 4px;
+      }
+      .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
       .table-responsive > p
       {
         position: sticky;
