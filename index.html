@@ -14,26 +14,30 @@
       {
         width: 100%;
       }
+      table, td
+      {
+        border: solid 1px black;
+      }
+      td
+      {
+        background-color: white;
+      }
       td span
       {
         display: block;
-        padding: 10px;
+        padding: 10px 20px;
         text-align: center;
         cursor: pointer;
-        background-color: white;
-        border: solid 1px black;
         position: relative;
       }
       td span i
       {
         position: absolute;
-        left: 100%;
-        bottom: 100%;
-        transform: translate(-50%, 50%);
+        top: 0;
+        right: 0;
         z-index: 2;
-        color: red;
-        background-color: #fff;
-        border-radius: 50%;
+        color: white;
+        background-color: red;
         opacity: 0;
         width: 16px;
         height: 16px;
@@ -59,7 +63,7 @@
     </style>
   </head>
   <body> 
-    <div class="container py-4">
+    <div class="container py-4 px-3">
       <h1 class="mb-4">工單產生器</h1>
       <ul class="nav nav-tabs" id="" role="tablist">
         <li class="nav-item" role="presentation">
@@ -89,7 +93,7 @@
         <div class="tab-pane fade" id="tab-pane-2" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
           <div class="row g-3">
             <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test5</button>
+              <button class="material btn btn-primary" type="button">test5333</button>
             </div>
             <div class="col-auto">
               <button class="material btn btn-primary" type="button">test6</button>
@@ -127,7 +131,7 @@
 
       $(document).on('click','#buttons .material',function(){
         let text = $(this).text().trim()
-        let html = `<td><span>${text}<i class="bi bi-x-circle-fill"></i></span></td>`
+        let html = `<td><span>${text}<i class="bi bi-x"></i></span></td>`
         $('#items').append(html)
         toolShow()
       })
@@ -135,7 +139,8 @@
       const sortable1El = document.getElementById('items')
       const sortable1 = Sortable.create(sortable1El, {
         swapThreshold: 1,
-        animation: 150
+        animation: 150,
+        ghostClass: 'bg-warning-subtle'
       })
 
       $(document).on("click",'table td span i',function(e){
