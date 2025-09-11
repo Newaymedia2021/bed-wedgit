@@ -22,6 +22,7 @@
       td
       {
         background-color: white;
+        white-space: nowrap;
       }
       td span
       {
@@ -82,42 +83,258 @@
       <h1 class="mb-4">工單產生器</h1>
       <ul class="nav nav-tabs" id="" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="tab-pane-1" aria-selected="true">標題一</button>
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="tab-pane-1" aria-selected="true">第一頁</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="tab-pane-2" aria-selected="false">標題二</button>
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="tab-pane-2" aria-selected="false">第二頁</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="tab-pane-3" aria-selected="false">第三頁</button>
         </li>
       </ul>
       <div class="tab-content p-3 border border-top-0" id="buttons">
         <div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-          <div class="row g-3">
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test1</button>
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-1-1" data-bs-toggle="pill" data-bs-target="#tab-panel-1-1" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">聚合</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-2" data-bs-toggle="pill" data-bs-target="#tab-panel-1-2" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">泡棉</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-3" data-bs-toggle="pill" data-bs-target="#tab-panel-1-3" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">記憶</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-4" data-bs-toggle="pill" data-bs-target="#tab-panel-1-4" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">乳膠</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-5" data-bs-toggle="pill" data-bs-target="#tab-panel-1-5" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">馬毛</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-6" data-bs-toggle="pill" data-bs-target="#tab-panel-1-6" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">羊毛</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-7" data-bs-toggle="pill" data-bs-target="#tab-panel-1-7" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">蠶絲</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-8" data-bs-toggle="pill" data-bs-target="#tab-panel-1-8" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">彈性棉</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-9" data-bs-toggle="pill" data-bs-target="#tab-panel-1-9" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">樹酯被</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-1-10" data-bs-toggle="pill" data-bs-target="#tab-panel-1-10" type="button" role="tab" aria-controls="tab-panel-1-1" aria-selected="true">3cm彈簧</button>
             </div>
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test2</button>
-            </div>
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test3</button>
-            </div>
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test4</button>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-1-1" role="tabpanel" aria-labelledby="tab-1-1" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">聚1</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">聚2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">聚3</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-2" role="tabpanel" aria-labelledby="tab-1-2" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">M粉泡2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">M粉泡4</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">Z白泡2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">Z灰泡2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">Z灰泡4</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">J藍泡2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">J藍泡4</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">J軟泡1</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">J硬泡1</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">J硬泡2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">S備長炭2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">S平安夜軟2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">S平安夜軟3.5</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-3" role="tabpanel" aria-labelledby="tab-1-3" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">M矽2.5</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">Z軟矽2.5</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">Z軟矽5</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-4" role="tabpanel" aria-labelledby="tab-1-4" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">乳1</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">乳2.5</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">乳5</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">比利時乳2.5</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">開模乳5</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">七段乳5</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-5" role="tabpanel" aria-labelledby="tab-1-5" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">馬毛</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑馬毛</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">馬毛3.5KG</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-6" role="tabpanel" aria-labelledby="tab-1-6" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">羊毛</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-7" role="tabpanel" aria-labelledby="tab-1-7" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蠶絲</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-8" role="tabpanel" aria-labelledby="tab-1-8" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">彈性棉2</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">彈性棉5</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-9" role="tabpanel" aria-labelledby="tab-1-9" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">樹酯被</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-1-10" role="tabpanel" aria-labelledby="tab-1-10" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">陸3CM</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">德鋼3CM</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">英鋼3CM</button></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="tab-pane fade" id="tab-pane-2" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-          <div class="row g-3">
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test5333</button>
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-2-1" data-bs-toggle="pill" data-bs-target="#tab-panel-2-1" type="button" role="tab" aria-controls="tab-panel-2-1" aria-selected="true">彈簧</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-2" data-bs-toggle="pill" data-bs-target="#tab-panel-2-2" type="button" role="tab" aria-controls="tab-panel-2-2" aria-selected="true">輔助</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-3" data-bs-toggle="pill" data-bs-target="#tab-panel-2-3" type="button" role="tab" aria-controls="tab-panel-2-3" aria-selected="true">泡條</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-4" data-bs-toggle="pill" data-bs-target="#tab-panel-2-4" type="button" role="tab" aria-controls="tab-panel-2-4" aria-selected="true">PE</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-5" data-bs-toggle="pill" data-bs-target="#tab-panel-2-5" type="button" role="tab" aria-controls="tab-panel-2-5" aria-selected="true">樹酯棉(三折墊)</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-6" data-bs-toggle="pill" data-bs-target="#tab-panel-2-6" type="button" role="tab" aria-controls="tab-panel-2-6" aria-selected="true">防穿刺</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-7" data-bs-toggle="pill" data-bs-target="#tab-panel-2-7" type="button" role="tab" aria-controls="tab-panel-2-7" aria-selected="true">絲光棉</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-8" data-bs-toggle="pill" data-bs-target="#tab-panel-2-8" type="button" role="tab" aria-controls="tab-panel-2-8" aria-selected="true">棉被</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-9" data-bs-toggle="pill" data-bs-target="#tab-panel-2-9" type="button" role="tab" aria-controls="tab-panel-2-9" aria-selected="true">石棉</button>
+              <button class="btn-sm btn btn-outline-primary" id="tab-2-10" data-bs-toggle="pill" data-bs-target="#tab-panel-2-10" type="button" role="tab" aria-controls="tab-panel-2-10" aria-selected="true">聚酯棉</button>
             </div>
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test6</button>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-2-1" role="tabpanel" aria-labelledby="tab-2-1" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">2.3(15)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">2.3(18)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">2.6(15)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">2.6(18)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">台獨硬獨20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">獨20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">硬獨20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">硬獨25</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">獨蜂20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">硬蜂20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">五段20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">667(20)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">900(20)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">1200(20)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">2000(20)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">低獨10</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">低黑彈簧10CM</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">大芯網</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">獨8環(18)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">A-20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">B白-20</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">德C-20</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-2" role="tabpanel" aria-labelledby="tab-2-2" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">免輔</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">四輔</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">四輔(4433)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">四輔助滿</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-3" role="tabpanel" aria-labelledby="tab-2-3" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">上框黃軟泡８</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-4" role="tabpanel" aria-labelledby="tab-2-4" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">PE3</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">PE5</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-5" role="tabpanel" aria-labelledby="tab-2-5" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">樹酯棉3</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-6" role="tabpanel" aria-labelledby="tab-2-6" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">防穿刺</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-7" role="tabpanel" aria-labelledby="tab-2-7" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">絲光棉</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-8" role="tabpanel" aria-labelledby="tab-2-8" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">棉被</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-9" role="tabpanel" aria-labelledby="tab-2-9" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">兩面薄石</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">兩面厚石</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">正免石</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">反免石</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">*改 正加厚石*</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">*正另加薄石*</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">雙免石</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">兩面白薄石</button></div>
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="tab-panel-2-10" role="tabpanel" aria-labelledby="tab-2-10" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">聚酯棉2</button></div>
+                </div>
+              </div>
             </div>
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test7</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="tab-pane-3" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-3-1" data-bs-toggle="pill" data-bs-target="#tab-panel-3-1" type="button" role="tab" aria-controls="tab-panel-3-1" aria-selected="true">織帶</button>
             </div>
-            <div class="col-auto">
-              <button class="material btn btn-primary" type="button">test8</button>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-3-1" role="tabpanel" aria-labelledby="tab-3-1" tabindex="0">
+                <div class="row g-3">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">白</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">藍</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑菱</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓米</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">平安</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">深藍</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">線金</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓綠</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">雙色</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">線藍</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓灰</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黃</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">淺杏絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蔥粉</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓杏</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">灰</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">深杏絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蔥黃</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓藍</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">斜灰</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蔥灰</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">藍雙</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">米</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">綠絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點黑</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">白x藍</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">咖</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">咖絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點藍</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點白</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">金</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">灰絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點黃</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">平銀</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">銀</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">粉絨</button></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
