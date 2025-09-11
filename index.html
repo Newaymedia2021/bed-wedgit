@@ -26,29 +26,30 @@
         background-color: white;
         white-space: nowrap;
         padding: 10px 20px;
+        position: relative;
+        vertical-align: top;
       }
       td span
       {
         display: block;
         cursor: pointer;
-        position: relative;
       }
-      td span i
+      td i
       {
+        display: none;
         position: absolute;
         top: 0;
         right: 0;
         z-index: 2;
         color: white;
         background-color: red;
-        opacity: 0;
         width: 16px;
         height: 16px;
         line-height: 1;
       }
-      td span:hover > i
+      td:hover > i
       {
-        opacity: 1;
+        display: block;
       }
       .table-responsive
       {
@@ -350,13 +351,20 @@
           <label for="input-customer" class="form-label">客戶名稱（必填）</label>
           <input type="text" class="form-control watch-change" data-target="customer">
         </div>
-        <div class="w-100"></div>
         <div class="col-12 col-md-4">
-          <label for="input-customer" class="form-label">聯絡電話</label>
+          <label for="input-customer" class="form-label">聯絡電話（必填）</label>
           <input type="text" class="form-control watch-change" data-target="phone">
         </div>
-        <div class="w-100"></div>
         <div class="col-12 col-md-4">
+          <label for="input-customer" class="form-label">日期</label>
+          <input type="date" class="form-control watch-change" data-target="date">
+        </div>
+        <div class="col-12 m-0"></div>
+        <div class="col-12 col-md-4">
+          <label for="input-customer" class="form-label">數量（必填）</label>
+          <input type="number" class="form-control watch-change" data-target="qty">
+        </div>
+        <div class="col-12">
           <label for="input-customer" class="form-label">訂單備注</label>
           <textarea name="" id="" class="form-control watch-change" data-target="remark" rows="5"></textarea>
         </div>
@@ -370,20 +378,28 @@
         <table id="order">
           <tr>
             <td width="130px">客戶名稱</td>
-            <td colspan="999"><span id="customer"></span></td>
+            <td colspan="9" id="customer"></td>
           </tr>
           <tr>
             <td width="130px">聯絡電話</td>
-            <td colspan="999"><span id="phone"></span></td>
+            <td colspan="9" id="phone"></td>
           </tr>
+          <tr>
+            <td width="130px">日期</td>
+            <td colspan="9" id="date"></td>
+          </tr>
+          <tr>
+            <td width="130px">數量</td>
+            <td colspan="9" id="qty"></td>
+          </tr>
+          <tr>
+            <td class="bg-dark-subtle" colspan="10">訂單內容</td>
+          </tr>
+          <tr id="items"><td colspan="10" class="text-secondary text-center empty">尚未選擇</td></tr>
           <tr>
             <td width="130px">訂單備注</td>
-            <td colspan="999"><span id="remark"></span></td>
+            <td colspan="9" id="remark"></td>
           </tr>
-          <tr>
-            <td class="bg-dark-subtle" colspan="999">訂單內容</td>
-          </tr>
-          <tr id="items"><td colspan="999" class="text-secondary text-center empty">尚未選擇</td></tr>
         </table>
         <p class="my-4 text-danger">使用手機時，左右滑動此處可以看到更多</p>
       </div>
@@ -393,12 +409,12 @@
       {
         let len = $('#items td:not(.empty)').length
         if (len > 0) {
-          $('td.empty').addClass('d-none')
+          $('td.empty').remove()
           $('.tools').removeClass('d-none')
           $('.table-responsive').stop().animate({scrollLeft:$('#items').innerWidth()},800)
         } else {
           $('.tools').addClass('d-none')
-          $('td.empty').removeClass('d-none')
+          $('#items').html(`<td colspan="10" class="text-secondary text-center empty">尚未選擇</td>`)
         }
       }
 
@@ -408,7 +424,7 @@
         if (transform != undefined) {
           text = transform
         }
-        let html = `<td><span>${text}<i class="bi bi-x"></i></span></td>`
+        let html = `<td>${text}<i class="bi bi-x"></i></td>`
         $('#items').append(html)
         action()
       })
@@ -417,17 +433,17 @@
       const sortable1 = Sortable.create(sortable1El, {
         swapThreshold: 1,
         animation: 150,
+        filter: '.empty',
         ghostClass: 'bg-warning-subtle'
       })
 
-      $(document).on("click",'table td span i',function(e){
+      $(document).on("click",'table td i',function(e){
         e.preventDefault
         $(this).closest('td').remove()
         action()
       })
 
       $('#clear').on("click",function(e){
-        $('#items td:not(.empty)').remove()
         action()
       })
 
@@ -448,21 +464,68 @@
       })
 
        $('#export').on('click',function(){
+
+        let check = $('#customer').text() == "" || $('#phone').text() == "" || $('#qty').text() == ""
+
+        if (check) {
+          return alert('請檢查必填項目')
+        }
+
         // 取得 Table
-        var table = document.getElementById("order");
+        var table = document.getElementById("order").cloneNode(true); // clone → 不影響原本 DOM
+
+        // 🔑 處理所有 td/th
+        Array.from(table.querySelectorAll("td,th")).forEach(cell => {
+          // 把 <i> 標籤隱藏 (不刪掉功能)
+          cell.querySelectorAll("i").forEach(el => {
+            el.style.display = "none";   // 匯出的時候不會顯示
+            el.textContent = "";         // 確保不帶出 icon 符號
+          });
+
+          // 把 <br> 換成換行符號
+          cell.innerHTML = cell.innerHTML.replace(/<br\s*\/?>/gi, "\r\n");
+
+          // 強制取純文字
+          cell.textContent = String(cell.textContent.trim());
+        });
+
+        // 🚨 注意：這裡請用 aoa_to_sheet，不要再用 table_to_sheet
+        var aoa = [];
+        Array.from(table.rows).forEach(row => {
+          var rowData = [];
+          Array.from(row.cells).forEach(cell => {
+            rowData.push(cell.textContent);
+          });
+          aoa.push(rowData);
+        });
   
         // 轉成 worksheet
-        var worksheet = XLSX.utils.table_to_sheet(table);
-  
+        var worksheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        // 🔑 遍歷所有欄位 → 強制文字、允許換行
+        for (const cell in worksheet) {
+          if (cell[0] === "!") continue;
+          worksheet[cell].t = "s";
+          worksheet[cell].z = "@";
+          worksheet[cell].s = { 
+            alignment: { 
+              wrapText: true,
+              horizontal: "left",
+              vertical: "top"
+            }
+          };
+        }
+
         // 建立 workbook
         var workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "訂單");
   
         // 下載 Excel 檔
         XLSX.writeFile(workbook, "訂單.xlsx");
+
       })
 
-      $('.watch-change').on('change',function(){
+      $('.watch-change').on('keyup change',function(){
         let target = $(this).data('target')
         if (target == 'remark') {
           $(`#${target}`).html($(this).val().replace(/\n/g,'<br>'))
