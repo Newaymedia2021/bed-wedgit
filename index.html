@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js" integrity="sha512-csIng5zcB+XpulRUa+ev1zKo7zRNGpEaVfNB9On1no9KYTEY/rLGAEEpvgdw6nim1WdTuihZY1eqZ31K7/fZjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script id="excel" src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <style>
       table
       {
@@ -24,12 +25,11 @@
       {
         background-color: white;
         white-space: nowrap;
+        padding: 10px 20px;
       }
       td span
       {
         display: block;
-        padding: 10px 20px;
-        text-align: center;
         cursor: pointer;
         position: relative;
       }
@@ -345,13 +345,45 @@
           </div>
         </div>
       </div>
+      <div class="order-info my-3 row g-2">
+        <div class="col-12 col-md-4">
+          <label for="input-customer" class="form-label">客戶名稱（必填）</label>
+          <input type="text" class="form-control watch-change" data-target="customer">
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 col-md-4">
+          <label for="input-customer" class="form-label">聯絡電話</label>
+          <input type="text" class="form-control watch-change" data-target="phone">
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 col-md-4">
+          <label for="input-customer" class="form-label">訂單備注</label>
+          <textarea name="" id="" class="form-control watch-change" data-target="remark" rows="5"></textarea>
+        </div>
+      </div>
       <div class="tools pt-3 d-none">
-        <button type="button" id="copy" class="btn btn-sm btn-success">複製</button>
+        <!-- <button type="button" id="copy" class="btn btn-sm btn-success">複製</button> -->
+        <button type="button" id="export" class="btn btn-sm btn-success">匯出.xlsx</button>
         <button type="button" id="clear" class="btn btn-sm btn-danger">清空</button>
       </div>
       <div class="table-responsive pt-3">
-        <table>
-          <tr id="items"><!-- 丟入 --></tr>
+        <table id="order">
+          <tr>
+            <td width="130px">客戶名稱</td>
+            <td colspan="999"><span id="customer"></span></td>
+          </tr>
+          <tr>
+            <td width="130px">聯絡電話</td>
+            <td colspan="999"><span id="phone"></span></td>
+          </tr>
+          <tr>
+            <td width="130px">訂單備注</td>
+            <td colspan="999"><span id="remark"></span></td>
+          </tr>
+          <tr>
+            <td class="bg-dark-subtle" colspan="999">訂單內容</td>
+          </tr>
+          <tr id="items"><td colspan="999" class="text-secondary text-center empty">尚未選擇</td></tr>
         </table>
         <p class="my-4 text-danger">使用手機時，左右滑動此處可以看到更多</p>
       </div>
@@ -359,12 +391,14 @@
     <script>
       function action()
       {
-        let len = $('#items td').length
+        let len = $('#items td:not(.empty)').length
         if (len > 0) {
+          $('td.empty').addClass('d-none')
           $('.tools').removeClass('d-none')
           $('.table-responsive').stop().animate({scrollLeft:$('#items').innerWidth()},800)
         } else {
           $('.tools').addClass('d-none')
+          $('td.empty').removeClass('d-none')
         }
       }
 
@@ -393,7 +427,7 @@
       })
 
       $('#clear').on("click",function(e){
-        $('#items td').remove()
+        $('#items td:not(.empty)').remove()
         action()
       })
 
@@ -411,6 +445,30 @@
         document.execCommand("copy");
         $temp.remove();
         alert('已複製')
+      })
+
+       $('#export').on('click',function(){
+        // 取得 Table
+        var table = document.getElementById("order");
+  
+        // 轉成 worksheet
+        var worksheet = XLSX.utils.table_to_sheet(table);
+  
+        // 建立 workbook
+        var workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "訂單");
+  
+        // 下載 Excel 檔
+        XLSX.writeFile(workbook, "訂單.xlsx");
+      })
+
+      $('.watch-change').on('change',function(){
+        let target = $(this).data('target')
+        if (target == 'remark') {
+          $(`#${target}`).html($(this).val().replace(/\n/g,'<br>'))
+        } else {
+          $(`#${target}`).text($(this).val())
+        }
       })
 
     </script>
