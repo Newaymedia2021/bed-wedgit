@@ -12,6 +12,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js" integrity="sha512-csIng5zcB+XpulRUa+ev1zKo7zRNGpEaVfNB9On1no9KYTEY/rLGAEEpvgdw6nim1WdTuihZY1eqZ31K7/fZjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script id="excel" src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <!-- Popperjs -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <!-- Tempus Dominus JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
       table
       {
@@ -85,6 +93,12 @@
   </head>
   <body> 
     <div class="container py-4 px-3">
+      <!-- <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+          <div class="input-group-text"></div>
+        </div>
+      </div> -->
       <h1 class="mb-4">工單產生器v1.0</h1>
       <ul class="nav nav-tabs flex-nowrap overflow-x-scroll overflow-hidden" id="" role="tablist">
         <li class="nav-item flex-shrink-0" role="presentation">
@@ -363,7 +377,10 @@
         </div>
         <div class="col-12 col-md-4">
           <label for="input-customer" class="form-label">日期</label>
-          <input type="date" class="form-control watch-change" data-target="date">
+          <div class="input-group mb-3">
+            <input type="txet" class="form-control watch-change" id="datetimepicker1" data-target="date" autocomplete="off" inputmode="none">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+          </div>
         </div>
         <div class="col-12 m-0"></div>
         <div class="col-12 col-md-4">
@@ -540,6 +557,29 @@
         }
       })
 
+      new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'),{
+        dateRange: false,
+        multipleDatesSeparator: ' ~ ',
+        display: {
+          icons: {
+            today: 'fa-solid fa-calendar-check',
+            clear: 'fa-solid fa-trash',
+            close: 'fa-solid fa-xmark'
+          },
+          components: {
+            clock: false
+          },
+          buttons: {
+            today: true,
+            clear: true,
+            close: true
+          }
+        },
+        localization: {
+          locale: 'zh-TW',
+          format: 'yyyy-MM-dd',
+        }
+      });
     </script>
   </body>
 </html>
