@@ -25,11 +25,11 @@
       {
         width: 100%;
       }
-      table, td
+      table, td, th
       {
         border: solid 1px black;
       }
-      td
+      td, th
       {
         background-color: white;
         white-space: nowrap;
@@ -40,24 +40,35 @@
       td span
       {
         display: block;
-        cursor: pointer;
       }
-      td i
+      #buttons .tab-content
       {
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 2;
-        color: white;
-        background-color: red;
-        width: 16px;
-        height: 16px;
-        line-height: 1;
+        height: 500px;
+        overflow: scroll;
       }
-      td:hover > i
+      .block
       {
-        display: block!important;
+        border: solid 1px black;
+        display: block;
+        width: 30px;
+        height: 30px;
+      }
+      .material img
+      {
+        display: block;
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        margin: 0 auto;
+      }
+      .material picture
+      {
+        display: block;
+        text-align: center;
+      }
+      .bg
+      {
+        background-color: #fffddd;
       }
       .table-responsive
       {
@@ -89,6 +100,62 @@
       {
         text-align: left;
       }
+      .input
+      {
+        position: relative;
+      }
+      .input span
+      {
+        position: relative;
+        z-index: 2;
+        min-height: 24px;
+        pointer-events: none;
+        opacity: 0;
+      }
+      .input input,
+      .input textarea
+      {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        border: none;
+        outline: none;
+      }
+      .select
+      {
+        display: flex;
+        gap: 5px;
+      }
+      .select span
+      {
+        display: flex;
+        align-items: center; 
+        gap: 5px;
+        padding: 0 10px;
+        background-color: #eee;
+        border-radius: 50px;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .select span i
+      {
+        background-color: red;
+        color: #fff;
+        border-radius: 50px;
+        width: 14px;
+        height: 14px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .select span img
+      {
+        width: 15px;
+        height: 15px;
+        object-fit: cover;
+      }
     </style>
   </head>
   <body> 
@@ -102,19 +169,29 @@
       <h1 class="mb-4">工單產生器v1.0</h1>
       <ul class="nav nav-tabs flex-nowrap overflow-x-scroll overflow-hidden" id="" role="tablist">
         <li class="nav-item flex-shrink-0" role="presentation">
-          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="tab-pane-1" aria-selected="true">舒適層</button>
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="tab-pane-1" aria-selected="true" data-target-name="內材">舒適層</button>
         </li>
         <li class="nav-item flex-shrink-0" role="presentation">
-          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="tab-pane-2" aria-selected="false">支撐層</button>
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="tab-pane-2" aria-selected="false" data-target-name="內材">支撐層</button>
         </li>
         <li class="nav-item flex-shrink-0" role="presentation">
-          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="tab-pane-3" aria-selected="false">配件</button>
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="tab-pane-3" aria-selected="false" data-target-name="側邊樣式">側邊樣式</button>
         </li>
         <li class="nav-item flex-shrink-0" role="presentation">
-          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-4" type="button" role="tab" aria-controls="tab-pane-4" aria-selected="false">床墊工法</button>
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-4" type="button" role="tab" aria-controls="tab-pane-4" aria-selected="false" data-target-name="肚邊配色">肚邊配色</button>
+        </li>
+        <li class="nav-item flex-shrink-0" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-5" type="button" role="tab" aria-controls="tab-pane-5" aria-selected="false" data-target-name="底布樣式">底布樣式</button>
+        </li>
+        <li class="nav-item flex-shrink-0" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-6" type="button" role="tab" aria-controls="tab-pane-6" aria-selected="false" data-target-name="面布樣式">面布樣式</button>
+        </li>
+        <li class="nav-item flex-shrink-0" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-7" type="button" role="tab" aria-controls="tab-pane-7" aria-selected="false" data-target-name="輔料">輔料</button>
         </li>
       </ul>
       <div class="tab-content p-3 border border-top-0" id="buttons">
+        <!-- 舒適層 -->
         <div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
           <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -211,6 +288,7 @@
             </div>
           </div>
         </div>
+        <!-- 支撐層 -->
         <div class="tab-pane fade" id="tab-pane-2" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
           <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -314,160 +392,452 @@
             </div>
           </div>
         </div>
+        <!-- 側邊樣式 -->
         <div class="tab-pane fade" id="tab-pane-3" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
           <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <button class="btn-sm btn btn-outline-primary active" id="tab-3-1" data-bs-toggle="pill" data-bs-target="#tab-panel-3-1" type="button" role="tab" aria-controls="tab-panel-3-1" aria-selected="true">織帶</button>
+              <button class="btn-sm btn btn-outline-primary active" id="tab-3-1" data-bs-toggle="pill" data-bs-target="#tab-panel-3-1" type="button" role="tab" aria-controls="tab-panel-3-1" aria-selected="true">樣式</button>
             </div>
             <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
               <div class="tab-pane fade show active" id="tab-panel-3-1" role="tabpanel" aria-labelledby="tab-3-1" tabindex="0">
                 <div class="row g-2">
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">白</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">藍</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑菱</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓米</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">平安</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">深藍</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">線金</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓綠</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">雙色</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">線藍</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓灰</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黃</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">淺杏絨</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蔥粉</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓杏</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">灰</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">深杏絨</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蔥黃</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貓藍</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">斜灰</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">黑絨</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蔥灰</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">藍雙</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">米</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">綠絨</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點黑</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">白x藍</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">咖</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">咖絨</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點藍</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點白</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">金</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">灰絨</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">點黃</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">平銀</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">銀</button></div>
-                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">粉絨</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">包床ㄇ</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">下包反包ㄩ</button></div>
+                  <div class="col-12"><hr class="m-0"></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">31床</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">31床(全開)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">31床-邊灰</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">31床-邊米</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">31床-備註</button></div>
+                  <div class="col-12"><hr class="m-0"></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">3線</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">3線+1</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">3線(暗)</button></div>
+                  <div class="col-12"><hr class="m-0"></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">連3線</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">連3線-邊杏</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">連3線-邊綠</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">連3線-邊米</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">連3線-備註</button></div>
+                  <div class="col-12"><hr class="m-0"></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">4線</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">新4線</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">新4線(暗)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">新4線+1</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 肚邊配色 -->
+        <div class="tab-pane fade" id="tab-pane-4" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-4-1" data-bs-toggle="pill" data-bs-target="#tab-panel-4-1" type="button" role="tab" aria-controls="tab-panel-4-1" aria-selected="true">布花</button>
+            </div>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-4-1" role="tabpanel" aria-labelledby="tab-3-1" tabindex="0">
+                <div class="row g-2">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/806.jpg" alt="">806</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/弓字白.jpg" alt="">弓字白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/方淺灰.jpg" alt="">方淺灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/卡灰.jpg" alt="">卡灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/卡其.jpg" alt="">卡其</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/白格.jpg" alt="">白格</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/灰黑.jpg" alt="">灰黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/直白-平安夜.jpg" alt="">直白-平安夜</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/直灰.jpg" alt="">直灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/直金.jpg" alt="">直金</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/直淺灰-兔寶.jpg" alt="">直淺灰-兔寶</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/直綠-窩享眠.jpg" alt="">直綠-窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/花白.jpg" alt="">花白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/花灰.jpg" alt="">花灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/花灰L7.jpg" alt="">花灰L7</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/芽麻粉肚.jpg" alt="">芽麻粉肚</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/亮藍-麗格.jpg" alt="">亮藍-麗格</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/特多灰-艾伯頓.jpg" alt="">特多灰-艾伯頓</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/草綠.jpg" alt="">草綠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/淺灰L5.jpg" alt="">淺灰L5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/麻粉.jpg" alt="">麻粉</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/棉格.jpg" alt="">棉格</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/貼合白.jpg" alt="">貼合白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/新805.jpg" alt="">新805</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/新藍.jpg" alt="">新藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/線黑.jpg" alt="">線黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/墨灰.jpg" alt="">墨灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/貓米L1.jpg" alt="">貓米L1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/貓杏.jpg" alt="">貓杏</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/貓綠.jpg" alt="">貓綠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/貓藍L3.jpg" alt="">貓藍L3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/縱線黑.jpg" alt="">縱線黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/點灰.jpg" alt="">點灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/點硬白.jpg" alt="">點硬白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/藍絨.jpg" alt="">藍絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/藏藍.jpg" alt="">藏藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/BD-1黑艾伯頓三折墊.jpg" alt="">BD-1黑艾伯頓三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/BD-2白艾伯頓三折墊.jpg" alt="">BD-2白艾伯頓三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/BN42藍.jpg" alt="">BN42藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/BN粉.jpg" alt="">BN粉</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/D9白-山姆王.jpg" alt="">D9白-山姆王</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/肚邊配色/D9白.jpg" alt="">D9白</picture></button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 底布樣式 -->
+        <div class="tab-pane fade" id="tab-pane-5" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-5-1" data-bs-toggle="pill" data-bs-target="#tab-panel-5-1" type="button" role="tab" aria-controls="tab-panel-5-1" aria-selected="true">樣式</button>
+            </div>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-5-1" role="tabpanel" aria-labelledby="tab-3-1" tabindex="0">
+                <div class="row g-2">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">止滑</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">蓆</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">雙布(薄)</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">柔藤</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">孟宗竹</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貼合網白</button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm" type="button">貼合網灰</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 面布樣式 -->
+        <div class="tab-pane fade" id="tab-pane-6" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-6-1" data-bs-toggle="pill" data-bs-target="#tab-panel-6-1" type="button" role="tab" aria-controls="tab-panel-6-1" aria-selected="true">樣式</button>
+            </div>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-6-1" role="tabpanel" aria-labelledby="tab-3-1" tabindex="0">
+                <div class="row g-2">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/045窩享眠.jpg" alt="">045窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/604A.jpg" alt="">604A</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/606.jpg" alt="">606</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/609.jpg" alt="">609</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/804.jpg" alt="">804</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/806.jpg" alt="">806</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/大晉手把.jpg" alt="">大晉手把</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/天絲S-新家園.jpg" alt="">天絲S-新家園</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰-3.jpg" alt="">冰-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰86黑傢寓見.jpg" alt="">冰86黑傢寓見</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰97白傢寓見.jpg" alt="">冰97白傢寓見</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰白-2.jpg" alt="">冰白-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰白.jpg" alt="">冰白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰白s.jpg" alt="">冰白s</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/冰黑.jpg" alt="">冰黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/印花咖.jpg" alt="">印花咖</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/直灰.jpg" alt="">直灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/直極白-大千.jpg" alt="">直極白-大千</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/直A.jpg" alt="">直A</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/特多灰-艾伯頓.jpg" alt="">特多灰-艾伯頓</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/特製K-2.jpg" alt="">特製K-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/純白-1.jpg" alt="">純白-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/棉格.jpg" alt="">棉格</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/新805.jpg" alt="">新805</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/新藍.jpg" alt="">新藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/新O.jpg" alt="">新O</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/極白.jpg" alt="">極白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/極黑.jpg" alt="">極黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/墨Ｌ.jpg" alt="">墨Ｌ</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/藏藍.jpg" alt="">藏藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/鐵塔.jpg" alt="">鐵塔</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/A-2石墨烯小老闆.jpg" alt="">A-2石墨烯小老闆</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/A-3白小老闆.jpg" alt="">A-3白小老闆</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/A.jpg" alt="">A</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/AN-1安庭.jpg" alt="">AN-1安庭</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/AN-1極安庭.jpg" alt="">AN-1極安庭</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/AN-2極凍安庭三折墊.jpg" alt="">AN-2極凍安庭三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/B-1.jpg" alt="">B-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/B-2.jpg" alt="">B-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/B-3.jpg" alt="">B-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/B-41.jpg" alt="">B-41</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/BD-1黑艾伯頓三折墊.jpg" alt="">BD-1黑艾伯頓三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/BD-2白艾伯頓三折墊.jpg" alt="">BD-2白艾伯頓三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/BKL.jpg" alt="">BKL</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/C-2.jpg" alt="">C-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/C-5.jpg" alt="">C-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/c.jpg" alt="">c</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/C2-1兔寶.jpg" alt="">C2-1兔寶</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/CS-1眠花躺.jpg" alt="">CS-1眠花躺</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/CS-2眠花躺.jpg" alt="">CS-2眠花躺</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/CS-3眠花躺.jpg" alt="">CS-3眠花躺</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/CS-4恆溫眠花躺.jpg" alt="">CS-4恆溫眠花躺</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/D-2.jpg" alt="">D-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/D9白.jpg" alt="">D9白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/D9白山姆王.jpg" alt="">D9白山姆王</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/DF-1涼.jpg" alt="">DF-1涼</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/DF-2.jpg" alt="">DF-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/DP-朵法雅三折墊.jpg" alt="">DP-朵法雅三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/E-2.jpg" alt="">E-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/E-3.jpg" alt="">E-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/E.jpg" alt="">E</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/EH-白.jpg" alt="">EH-白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/EU-1白.jpg" alt="">EU-1白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/EU-2灰.jpg" alt="">EU-2灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/EU-3.jpg" alt="">EU-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/F-1.jpg" alt="">F-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/F-2大麻石墨烯.jpg" alt="">F-2大麻石墨烯</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/F-3.jpg" alt="">F-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/F-5.jpg" alt="">F-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/FK-47小波HANA寵物.jpg" alt="">FK-47小波HANA寵物</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/FK31-兔寶.jpg" alt="">FK31-兔寶</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/FK31床工匠.jpg" alt="">FK31床工匠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/FK31涼感天絲床工匠.jpg" alt="">FK31涼感天絲床工匠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/FK42新家園.jpg" alt="">FK42新家園</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/G-1.jpg" alt="">G-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/G-2床工匠.jpg" alt="">G-2床工匠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/H-1天絲.jpg" alt="">H-1天絲</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/H-2.jpg" alt="">H-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/H-5.jpg" alt="">H-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/H-5兔寶.jpg" alt="">H-5兔寶</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/H-22.jpg" alt="">H-22</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/HD-6東稻.jpg" alt="">HD-6東稻</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/HD-O.jpg" alt="">HD-O</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/HD-W窩享眠.jpg" alt="">HD-W窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/HD.jpg" alt="">HD</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/I-2.jpg" alt="">I-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/I-3.jpg" alt="">I-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/I-4.jpg" alt="">I-4</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/IS-3.jpg" alt="">IS-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/IS.jpg" alt="">IS</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/J-2.jpg" alt="">J-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/K-1.jpg" alt="">K-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/K-3.jpg" alt="">K-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/K-5.jpg" alt="">K-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/K.jpg" alt="">K</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/KL-1白九龍.jpg" alt="">KL-1白九龍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/KL-2直九龍.jpg" alt="">KL-2直九龍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/L-1.jpg" alt="">L-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/L-2電睡眠吐司.jpg" alt="">L-2電睡眠吐司</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/L-5.jpg" alt="">L-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LA03三折墊.jpg" alt="">LA03三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LA20桑納塔.jpg" alt="">LA20桑納塔</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LA30.jpg" alt="">LA30</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LA40睡眠吐司.jpg" alt="">LA40睡眠吐司</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LC-1麗綺.jpg" alt="">LC-1麗綺</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LINE_ALBUM_面（布花）_250728_1.jpg" alt="">LINE_ALBUM_面（布花）_250728_1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LINE_ALBUM_面（布花）_250728_2.jpg" alt="">LINE_ALBUM_面（布花）_250728_2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LINE_ALBUM_面（布花）_250728_4.jpg" alt="">LINE_ALBUM_面（布花）_250728_4</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LINE_ALBUM_面（布花）_250728_6.jpg" alt="">LINE_ALBUM_面（布花）_250728_6</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/LINE_ALBUM_面（布花）_250728_7.jpg" alt="">LINE_ALBUM_面（布花）_250728_7</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/M-2.jpg" alt="">M-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/M-9床工匠.jpg" alt="">M-9床工匠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Ｍ-10天絲床工匠.jpg" alt="">Ｍ-10天絲床工匠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/MS04059灰.jpg" alt="">MS04059灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/MT-1綠天絲.jpg" alt="">MT-1綠天絲</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/MT91平安夜.jpg" alt="">MT91平安夜</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/N海藻紗.jpg" alt="">N海藻紗</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/P-2.jpg" alt="">P-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/P-3石墨烯.jpg" alt="">P-3石墨烯</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Q-1.jpg" alt="">Q-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Q-29.jpg" alt="">Q-29</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/QM.jpg" alt="">QM</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/R-3.jpg" alt="">R-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/R-4.jpg" alt="">R-4</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/R-5.jpg" alt="">R-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/R-6.jpg" alt="">R-6</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/S-1.jpg" alt="">S-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/S.jpg" alt="">S</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/S獨.jpg" alt="">S獨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/SH.jpg" alt="">SH</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/SN-1咖三寧泰.jpg" alt="">SN-1咖三寧泰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/SN-2灰藍.jpg" alt="">SN-2灰藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/SN-3金.jpg" alt="">SN-3金</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/SS新家園.jpg" alt="">SS新家園</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/ST-1.jpg" alt="">ST-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/ST-2.jpg" alt="">ST-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/ST-3.jpg" alt="">ST-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/ST-5.jpg" alt="">ST-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/ST睡眠吐司.jpg" alt="">ST睡眠吐司</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/T-1.jpg" alt="">T-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/T-20天絲.jpg" alt="">T-20天絲</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TH.jpg" alt="">TH</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TW-1窩享棉三折墊.jpg" alt="">TW-1窩享棉三折墊</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TW-2冰窩享眠.jpg" alt="">TW-2冰窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TW-3涼窩享眠.jpg" alt="">TW-3涼窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TW-5批窩享眠.jpg" alt="">TW-5批窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TW-5窩享眠.jpg" alt="">TW-5窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TY-4.jpg" alt="">TY-4</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TY-6.jpg" alt="">TY-6</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TY-7.jpg" alt="">TY-7</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TY-8.jpg" alt="">TY-8</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TY-9.jpg" alt="">TY-9</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/TY-10.jpg" alt="">TY-10</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/U.jpg" alt="">U</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/V-1新花.jpg" alt="">V-1新花</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/V-2.jpg" alt="">V-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/V-3.jpg" alt="">V-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/V-3窩享眠.jpg" alt="">V-3窩享眠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/V-5.jpg" alt="">V-5</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/V-29.jpg" alt="">V-29</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/W-1.jpg" alt="">W-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/W-2.jpg" alt="">W-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/X-3.jpg" alt="">X-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/XY-1協盈.jpg" alt="">XY-1協盈</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Y-2天絲.jpg" alt="">Y-2天絲</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Z-1.jpg" alt="">Z-1</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Z-2.jpg" alt="">Z-2</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/Z-3.jpg" alt="">Z-3</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/面/ZY-1.jpg" alt="">ZY-1</picture></button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 輔料 -->
+        <div class="tab-pane fade" id="tab-pane-7" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3 flex-shrink-0 gap-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="btn-sm btn btn-outline-primary active" id="tab-7-1" data-bs-toggle="pill" data-bs-target="#tab-panel-7-1" type="button" role="tab" aria-controls="tab-panel-7-1" aria-selected="true">織帶</button>
+            </div>
+            <div class="tab-content p-3 bg-body-secondary flex-grow-1" id="">
+              <div class="tab-pane fade show active" id="tab-panel-3-1" role="tabpanel" aria-labelledby="tab-3-1" tabindex="0">
+                <div class="row g-2">
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/金.jpg" alt="">金</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/平安.jpg" alt="">平安</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/平銀.jpg" alt="">平銀</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/白.jpg" alt="">白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/白x藍.jpg" alt="">白x藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/灰.jpg" alt="">灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/灰絨.jpg" alt="">灰絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/米.jpg" alt="">米</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/咖.jpg" alt="">咖</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/咖絨.jpg" alt="">咖絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/斜灰.jpg" alt="">斜灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/深杏絨.jpg" alt="">深杏絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/深藍.jpg" alt="">深藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/淺杏絨.jpg" alt="">淺杏絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/黃.jpg" alt="">黃</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/黑.jpg" alt="">黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/黑絨.jpg" alt="">黑絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/黑菱.jpg" alt="">黑菱</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/綠絨.jpg" alt="">綠絨</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/銀.jpg" alt="">銀</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/線金.jpg" alt="">線金</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/線藍.jpg" alt="">線藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/蔥灰.jpg" alt="">蔥灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/蔥粉.jpg" alt="">蔥粉</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/蔥黃.jpg" alt="">蔥黃</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/貓灰.jpg" alt="">貓灰</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/貓米.jpg" alt="">貓米</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/貓杏.jpg" alt="">貓杏</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/貓綠.jpg" alt="">貓綠</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/點白.jpg" alt="">點白</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/點黃.jpg" alt="">點黃</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/點黑.jpg" alt="">點黑</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/點藍.jpg" alt="">點藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/藍.jpg" alt="">藍</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/藍雙.jpg" alt="">藍雙</picture></button></div>
+                  <div class="col-auto"><button class="material btn btn-light btn-sm img" type="button"><picture><img src="./images/織帶/雙色.jpg" alt="">雙色</picture></button></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="order-info my-3 row g-2">
-        <div class="col-12 col-md-4">
-          <label for="input-customer" class="form-label">客戶名稱（必填）</label>
-          <input type="text" class="form-control watch-change" data-target="customer">
-        </div>
-        <div class="col-12 col-md-4">
-          <label for="input-customer" class="form-label">聯絡電話（必填）</label>
-          <input type="text" class="form-control watch-change" data-target="phone">
-        </div>
-        <div class="col-12 col-md-4">
-          <label for="input-customer" class="form-label">日期</label>
-          <div class="input-group mb-3">
-            <input type="txet" class="form-control watch-change" id="datetimepicker1" data-target="date" autocomplete="off" inputmode="none">
-            <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-          </div>
-        </div>
-        <div class="col-12 m-0"></div>
-        <div class="col-12 col-md-4">
-          <label for="input-customer" class="form-label">數量（必填）</label>
-          <input type="number" class="form-control watch-change" data-target="qty" inputmode="numeric">
-        </div>
-        <div class="col-12">
-          <label for="input-customer" class="form-label">訂單備注</label>
-          <textarea name="" id="" class="form-control watch-change" data-target="remark" rows="5"></textarea>
-        </div>
-      </div>
-      <div class="tools pt-3 d-none">
+      <h3 class="mt-4 mb-0">訂單內容</h3>
+      <div class="tools pt-3">
         <!-- <button type="button" id="copy" class="btn btn-sm btn-success">複製</button> -->
         <button type="button" id="export" class="btn btn-sm btn-success">匯出.xlsx</button>
         <button type="button" id="clear" class="btn btn-sm btn-danger">清空</button>
       </div>
+      <div class="row g-2 pt-3">
+        <div class="col-auto d-flex align-items-center gap-2">
+          <span class="block bg"></span> 由選單選擇
+        </div>
+      </div>
       <div class="table-responsive pt-3">
         <table id="order">
-          <tr>
-            <td width="130px">客戶名稱</td>
-            <td colspan="9" id="customer"></td>
+          <thead>
+            <tr>
+              <th>品代</th>
+              <th>品名</th>
+              <th>尺寸</th>
+              <th>內材（舒適層、支撐層）</th>
+              <th>側邊樣式</th>
+              <th>肚邊長度</th>
+              <th>肚-配色</th>
+              <th>反</th>
+              <th>面</th>
+              <th>邊</th>
+            </tr>
+          </thead>
+          <tr id="items">
+            <td><div class="input"><span></span><input type="text" name="product_no" id=""></div></td>
+            <td><div class="input"><span></span><input type="text" name="product_title" id=""></div></td>
+            <td><div class="input"><span></span><input type="text" name="product_size" id=""></div></td>
+            <td class="bg"><div class="select" data-name="內材"></div></td>
+            <td class="bg"><div class="select" data-name="側邊樣式"></div></td>
+            <td><div class="input"><span></span><input type="text" name="product_len" id=""></div></td>
+            <td class="bg"><div class="select" data-name="肚邊配色"></div></td>
+            <td class="bg"><div class="select" data-name="底布樣式"></div></td>
+            <td class="bg"><div class="select" data-name="面布樣式"></div></td>
+            <td class="bg"><div class="select" data-name="輔料"></div></td>
           </tr>
           <tr>
-            <td width="130px">聯絡電話</td>
-            <td colspan="9" id="phone"></td>
-          </tr>
-          <tr>
-            <td width="130px">日期</td>
-            <td colspan="9" id="date"></td>
-          </tr>
-          <tr>
-            <td width="130px">數量</td>
-            <td colspan="9" id="qty"></td>
-          </tr>
-          <tr>
-            <td class="bg-dark-subtle" colspan="10">訂單內容</td>
-          </tr>
-          <tr id="items"><td colspan="10" class="text-secondary text-center empty">尚未選擇</td></tr>
-          <tr>
-            <td width="130px">訂單備注</td>
-            <td colspan="9" id="remark"></td>
+            <th width="130px">訂單備注</th>
+            <td colspan="98" id="remark"><div class="input"><span></span><textarea name="remark" id=""></textarea></div></td>
           </tr>
         </table>
         <p class="my-4 text-danger">使用手機時，左右滑動此處可以看到更多</p>
       </div>
     </div>
     <script>
-      function action()
-      {
-        let len = $('#items td:not(.empty)').length
-        if (len > 0) {
-          $('td.empty').remove()
-          $('.tools').removeClass('d-none')
-          $('.table-responsive').stop().animate({scrollLeft:$('#items').innerWidth()},800)
-        } else {
-          $('.tools').addClass('d-none')
-          $('#items').html(`<td colspan="10" class="text-secondary text-center empty">尚未選擇</td>`)
-        }
-      }
 
       $(document).on('click','#buttons .material',function(){
         let text = $(this).text().trim()
+        let target = $(".nav-link.active").data('target-name')
         let transform = $(this).data('transform')
+        let html = ''
         if (transform != undefined) {
           text = transform
         }
-        let html = `<td>${text}<i class="bi bi-x"></i></td>`
-        $('#items').append(html)
-        action()
+        if ($(this).hasClass('img')) {
+          let img  = $(this).find('img').attr('src')
+          html = `<span><img src="${img}" alt="" />${text} <i class="bi bi-x"></i></span>`
+        } else {
+          html = `<span>${text} <i class="bi bi-x"></i></span>`
+        }
+        if (typeof(target) != "undefined") {
+          $(`.select[data-name="${target}"]`).append(html)
+        }
+      })
+
+      $(document).on("click",'.select span i',function(){
+        $(this).closest('span').remove()
+      })
+
+      $('.input input').on('keyup change',function(){
+        let val = $(this).val()
+        $(this).siblings('span').text(val)
+      })
+
+      $('.input textarea').on('keyup change',function(){
+        let val = $(this).val()
+        $(this).siblings('span').html(val.replace(/\n/g,'<br/>'))
       })
       
-      const sortable1El = document.getElementById('items')
-      const sortable1 = Sortable.create(sortable1El, {
-        swapThreshold: 1,
-        animation: 150,
-        filter: '.empty',
-        ghostClass: 'bg-warning-subtle'
-      })
+      // const sortable1El = document.getElementById('items')
+      // const sortable1 = Sortable.create(sortable1El, {
+      //   swapThreshold: 1,
+      //   animation: 150,
+      //   filter: '.empty',
+      //   ghostClass: 'bg-warning-subtle'
+      // })
 
-      $(document).on("click",'table td i',function(e){
-        e.preventDefault
-        $(this).closest('td').remove()
-        action()
-      })
+      
 
       $('#clear').on("click",function(e){
-        action()
+        // action()
+        $('.input span').text('')
+        $('.input input').val('')
+        $('.input textarea').val('')
+        $('.select').html('')
       })
 
       $('#copy').on("click",function(e){
@@ -486,67 +856,76 @@
         alert('已複製')
       })
 
-       $('#export').on('click',function(){
+      $('#export').on('click', function () {
 
-        let check = $('#customer').text() == "" || $('#phone').text() == "" || $('#qty').text() == ""
+        // let check = $('#customer').text() == "" || $('#phone').text() == "" || $('#qty').text() == "";
+        // if (check) return alert('請檢查必填項目');
 
-        if (check) {
-          return alert('請檢查必填項目')
-        }
+        // 1) 取 table（clone，不影響原 DOM）
+        var table = document.getElementById("order").cloneNode(true);
 
-        // 取得 Table
-        var table = document.getElementById("order").cloneNode(true); // clone → 不影響原本 DOM
-
-        // 🔑 處理所有 td/th
+        // 2) 預處理：隱藏 <i>、把 <br> 換成 \n
         Array.from(table.querySelectorAll("td,th")).forEach(cell => {
-          // 把 <i> 標籤隱藏 (不刪掉功能)
           cell.querySelectorAll("i").forEach(el => {
-            el.style.display = "none";   // 匯出的時候不會顯示
-            el.textContent = "";         // 確保不帶出 icon 符號
+            el.style.display = "none";
+            el.textContent = "";
           });
-
-          // 把 <br> 換成換行符號
-          cell.innerHTML = cell.innerHTML.replace(/<br\s*\/?>/gi, "\r\n");
-
-          // 強制取純文字
-          cell.textContent = String(cell.textContent.trim());
+          cell.innerHTML = cell.innerHTML.replace(/<br\s*\/?>/gi, "\n");
         });
 
-        // 🚨 注意：這裡請用 aoa_to_sheet，不要再用 table_to_sheet
+        // 3) 轉 table -> AOA，處理圖片為 URL（多張用換行）
         var aoa = [];
         Array.from(table.rows).forEach(row => {
           var rowData = [];
           Array.from(row.cells).forEach(cell => {
-            rowData.push(cell.textContent);
+            // 收集圖片 URL
+            const imgs = Array.from(cell.querySelectorAll('img')).map(img => img.src || '');
+            let text = cell.textContent.trim();
+
+            // 若有圖片，把圖片 URL 併入（保留原本文字於上方）
+            if (imgs.length > 0) {
+              const imgBlock = imgs.join('\n');      // 多張用換行
+              text = text ? (text + '\n' + imgBlock) : imgBlock;
+            }
+
+            // 一律當字串
+            rowData.push(String(text));
           });
           aoa.push(rowData);
         });
-  
-        // 轉成 worksheet
+
+        // 4) AOA -> worksheet（避免自動型別判斷）
         var worksheet = XLSX.utils.aoa_to_sheet(aoa);
 
-        // 🔑 遍歷所有欄位 → 強制文字、允許換行
-        for (const cell in worksheet) {
-          if (cell[0] === "!") continue;
-          worksheet[cell].t = "s";
-          worksheet[cell].z = "@";
-          worksheet[cell].s = { 
-            alignment: { 
-              wrapText: true,
-              horizontal: "left",
-              vertical: "top"
+        // 5) 樣式：全文字、換行、置左、置頂；並把 URL 變超連結
+        const urlRe = /^(https?:\/\/[^\s]+)$/i; // 簡單判斷 URL，一行一個
+        for (const addr in worksheet) {
+          if (addr[0] === '!') continue;
+          const cell = worksheet[addr];
+
+          // 保證是文字
+          cell.t = 's';
+          cell.z = '@';
+          cell.s = { alignment: { wrapText: true, horizontal: 'left', vertical: 'top' } };
+
+          // 超連結處理：若內容含多行，逐行轉超連結（Excel 只能對整格設一個 link，所以策略是：
+          // - 若只有一行且是 URL -> 設超連結
+          // - 若多行：保留純文字（避免誤導只鏈接第一行）
+          if (typeof cell.v === 'string') {
+            const lines = cell.v.split('\n');
+            if (lines.length === 1 && urlRe.test(lines[0])) {
+              cell.l = { Target: lines[0] };  // 點一下就能開圖
+              // 可選：顯示文字不同於 URL
+              // cell.v = '查看圖片';
             }
-          };
+          }
         }
 
-        // 建立 workbook
+        // 6) 建立 workbook 並下載
         var workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "訂單");
-  
-        // 下載 Excel 檔
         XLSX.writeFile(workbook, "訂單.xlsx");
-
-      })
+      });
 
       $('.watch-change').on('keyup change',function(){
         let target = $(this).data('target')
@@ -557,29 +936,29 @@
         }
       })
 
-      new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'),{
-        dateRange: false,
-        multipleDatesSeparator: ' ~ ',
-        display: {
-          icons: {
-            today: 'fa-solid fa-calendar-check',
-            clear: 'fa-solid fa-trash',
-            close: 'fa-solid fa-xmark'
-          },
-          components: {
-            clock: false
-          },
-          buttons: {
-            today: true,
-            clear: true,
-            close: true
-          }
-        },
-        localization: {
-          locale: 'zh-TW',
-          format: 'yyyy-MM-dd',
-        }
-      });
+      // new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'),{
+      //   dateRange: false,
+      //   multipleDatesSeparator: ' ~ ',
+      //   display: {
+      //     icons: {
+      //       today: 'fa-solid fa-calendar-check',
+      //       clear: 'fa-solid fa-trash',
+      //       close: 'fa-solid fa-xmark'
+      //     },
+      //     components: {
+      //       clock: false
+      //     },
+      //     buttons: {
+      //       today: true,
+      //       clear: true,
+      //       close: true
+      //     }
+      //   },
+      //   localization: {
+      //     locale: 'zh-TW',
+      //     format: 'yyyy-MM-dd',
+      //   }
+      // });
     </script>
   </body>
 </html>
